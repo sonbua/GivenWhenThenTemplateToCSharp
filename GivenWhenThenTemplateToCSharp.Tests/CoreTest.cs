@@ -2,10 +2,9 @@ using Xunit;
 
 namespace GivenWhenThenTemplateToCSharp.Tests
 {
-    public class UnitTest1
+    public class CoreTest
     {
-        [Fact]
-        public void Test1()
+        public class given_a_feature_file_content : CoreTest
         {
         }
     }
