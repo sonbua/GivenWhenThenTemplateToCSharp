@@ -17,7 +17,7 @@ namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp
         public string Handle(TemplateConversionRequest request, Func<TemplateConversionRequest, string> next)
         {
             var featureContent =
-                new[] {request.FileInfo.NameWithoutExtension()}
+                new[] {request.FileInfo.NameWithoutExtension() + "Test"}
                     .Concat(request.FeatureContent.Select(line => _context.Indent + line))
                     .ToArray();
 
