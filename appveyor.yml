@@ -1,0 +1,9 @@
+version: 1.0.1.{build}
+image: Visual Studio 2017
+configuration: Release
+before_build:
+- cmd: >-
+    cd src
+    dotnet restore
+build:
+  verbosity: minimal

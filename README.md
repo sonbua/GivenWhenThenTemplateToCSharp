@@ -1,6 +1,6 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/7gxvggk4r1aauun9/branch/master?svg=true)](https://ci.appveyor.com/project/sonbua/givenwhenthentemplatetocsharp/branch/master)
+*Given-When-Then template to C#* is a commandline tool to convert given-when-then clauses to [xUnit.net](https://github.com/xunit/xunit) tests. The structure of unit tests is inspired by [this](https://haacked.com/archive/2012/01/02/structuring-unit-tests.aspx/) and [this](http://zendeveloper.blogspot.com/2012/01/structuring-unit-tests.html) article.
 
-# Given-When-Then template to C# conversion
+[![Build status](https://ci.appveyor.com/api/projects/status/7gxvggk4r1aauun9/branch/master?svg=true)](https://ci.appveyor.com/project/sonbua/givenwhenthentemplatetocsharp/branch/master)
 
 ## Quick start
 
@@ -27,7 +27,7 @@ gwt --features /c/features/GuessTheWord.feature --namespace ProductionCode.Tests
 
 Test file is generated in the same directory as the feature file, i.e. `/c/features/GuessTheWordTest.cs`
 
-```cs
+```c#
 namespace ProductionCode.Tests
 {
     public class GuessTheWordTest
@@ -54,6 +54,20 @@ namespace ProductionCode.Tests
 
 Being noted that both test class and generated file have a `Test`-suffix.
 
+Multiple given-when-then in a feature are also supported. Optionally use blank lines to make the specs easier to read.
+
+```
+Given I am logged in as Dr. Bill
+    When I try to post to "Expensive Therapy"
+        Then I should see "Your article was published."
+    When I try to post to "Greg's anti-tax rants"
+        Then I should see "Hey! That's not your blog!"
+
+Given I am logged in as Greg
+    When I try to post to "Expensive Therapy"
+        Then I should see "Your article was published."
+```
+
 ## Commandline options
 
 ```
@@ -68,7 +82,7 @@ Being noted that both test class and generated file have a `Test`-suffix.
 
 ## Notes
 
-To build this console app as Windows 10 executable (`.exe` file), run this command
+To build this console app as Windows 10 executable (`.exe`), run this command
 
 ```
 dotnet build -c Release -r win10-x64
@@ -76,5 +90,5 @@ dotnet build -c Release -r win10-x64
 
 ## Credits and references
 * [Command Line Parser](https://github.com/commandlineparser/commandline)
-* [Structuring Unit Tests](https://haacked.com/archive/2012/01/02/structuring-unit-tests.aspx/)
+* Structuring Unit Tests [here](https://haacked.com/archive/2012/01/02/structuring-unit-tests.aspx/) and [here](http://zendeveloper.blogspot.com/2012/01/structuring-unit-tests.html)
 * [Generate an exe for .NET Core Console Apps: .NET Core Quick Posts Part V](https://dzone.com/articles/generate-an-exe-for-net-core-console-apps-net-core)
