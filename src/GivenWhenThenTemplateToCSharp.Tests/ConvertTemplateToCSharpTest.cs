@@ -12,14 +12,16 @@ namespace GivenWhenThenTemplateToCSharp.Tests
 
         protected ConvertTemplateToCSharpTest()
         {
+            var context = new ConvertTemplateToCSharpContext();
+
             _converter = new ConvertTemplateToCSharpHandler(
                 new TrimEndFeatureContent(),
-                new ConvertTemplateToCSharpCore(
-                    new DetectIndentHandler(
-                        new DefaultToTab(),
-                        new ParseIndentInformationFromSecondLine()
-                    )
-                )
+                new DetectIndentAdapter(
+                    new DetectIndentHandler(new DefaultToTab(), new ParseIndentInformationFromSecondLine()),
+                    context
+                ),
+                new EnrichFileNameAsWrapperTestClass(context),
+                new ConvertTemplateToCSharpCore(context)
             );
         }
 

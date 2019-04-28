@@ -4,4 +4,7 @@
         <TargetFramework>netcoreapp2.2</TargetFramework>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
+    <ItemGroup>
+      <PackageReference Include="CommandLineParser" Version="2.4.3" />
+    </ItemGroup>
 </Project>

@@ -6,9 +6,13 @@ namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp
     {
         public ConvertTemplateToCSharpHandler(
             TrimEndFeatureContent trimEndFeatureContent,
+            DetectIndentAdapter detectIndentAdapter,
+            EnrichFileNameAsWrapperTestClass enrichFileNameAsWrapperTestClass,
             ConvertTemplateToCSharpCore convertTemplateToCSharpCore)
         {
             AddHandler(trimEndFeatureContent);
+            AddHandler(detectIndentAdapter);
+            AddHandler(enrichFileNameAsWrapperTestClass);
             AddHandler(convertTemplateToCSharpCore);
         }
     }
