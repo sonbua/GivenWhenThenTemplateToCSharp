@@ -14,13 +14,13 @@ Run this in the repository's root directory
 
 ```
 cd src/GivenWhenThenTemplateToCSharp
-dotnet run -- -f /c/features/GuessTheWord.feature -n ProductionCode.Tests
+dotnet run -- --features /c/features/GuessTheWord.feature --namespace ProductionCode.Tests
 ```
 
 Or in the commandline where `gwt.exe` is located
 
 ```
-gwt -f /c/features/GuessTheWord.feature -n ProductionCode.Tests
+gwt --features /c/features/GuessTheWord.feature --namespace ProductionCode.Tests
 ```
 
 Test file is generated in the same directory as the feature file, i.e. `/c/features/GuessTheWordTest.cs`
