@@ -2,7 +2,7 @@
 
 ## Quick start
 
-Assuming that a feature under test is located at `/c/features/GuessTheWord.feature` with this content
+Assuming that a feature is described in `/c/features/GuessTheWord.feature` with this content
 
 ```
 Given the Maker has started a game with the word silky
@@ -10,20 +10,20 @@ Given the Maker has started a game with the word silky
         Then the Breaker must guess a word with 5 characters
 ```
 
-Run in the commandline
-
-```
-gwt -f /c/features/GuessTheWord.feature -n ProductionCode.Tests
-```
-
-Or in the repository's root directory
+Run this in the repository's root directory
 
 ```
 cd src/GivenWhenThenTemplateToCSharp
 dotnet run -- -f /c/features/GuessTheWord.feature -n ProductionCode.Tests
 ```
 
-Generated tests is located at `/c/features/GuessTheWordTest.cs`
+Or in the commandline where `gwt.exe` is located
+
+```
+gwt -f /c/features/GuessTheWord.feature -n ProductionCode.Tests
+```
+
+Test file is generated in the same directory as the feature file, i.e. `/c/features/GuessTheWordTest.cs`
 
 ```cs
 namespace ProductionCode.Tests
@@ -50,7 +50,7 @@ namespace ProductionCode.Tests
 }
 ```
 
-Being noted that test class and generated file has a `Test`-suffix.
+Being noted that both test class and generated file have a `Test`-suffix.
 
 ## Commandline options
 
@@ -64,6 +64,15 @@ Being noted that test class and generated file has a `Test`-suffix.
   --version          Display version information.
 ```
 
+## Notes
+
+To build this console app as Windows 10 executable (`.exe` file), run this command
+
+```
+dotnet build -c Release -r win10-x64
+```
+
 ## Credits and references
 * [Command Line Parser](https://github.com/commandlineparser/commandline)
 * [Structuring Unit Tests](https://haacked.com/archive/2012/01/02/structuring-unit-tests.aspx/)
+* [Generate an exe for .NET Core Console Apps: .NET Core Quick Posts Part V](https://dzone.com/articles/generate-an-exe-for-net-core-console-apps-net-core)
