@@ -57,9 +57,9 @@ namespace GivenWhenThenTemplateToCSharp.Tests
                     .Be(
                         "namespace SomeNamespace\n" +
                         "{\n" +
-                        "    public class Scenario1\n" +
+                        "    public class Scenario1Test\n" +
                         "    {\n" +
-                        "        public class Given_the_Maker_has_started_a_game_with_the_word_silky : Scenario1\n" +
+                        "        public class Given_the_Maker_has_started_a_game_with_the_word_silky : Scenario1Test\n" +
                         "        {\n" +
                         "            public class When_the_Breaker_joins_the_Makers_game : Given_the_Maker_has_started_a_game_with_the_word_silky\n" +
                         "            {\n" +
