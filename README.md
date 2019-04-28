@@ -25,7 +25,7 @@ dotnet run -- -f /c/features/GuessTheWord.feature -n ProductionCode.Tests
 
 Generated tests is located at `/c/features/GuessTheWordTest.cs`
 
-```
+```cs
 namespace ProductionCode.Tests
 {
     public class GuessTheWordTest
