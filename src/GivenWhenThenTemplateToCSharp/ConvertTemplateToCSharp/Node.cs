@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp.Normalize;
 
 namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp
 {
@@ -57,9 +58,9 @@ namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp
             }
         }
 
-        public static Node Parse(string line, Node previous, string indent)
+        public static Node Parse(string line, Normalizer normalizer, Node previous, string indent)
         {
-            var name = line.Trim();
+            var name = normalizer.Handle(line.Trim(), null);
             var indentLevel = IndentLevel(line, indent);
             var parent = previous.TraverseUp(indentLevel - 1);
 

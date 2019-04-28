@@ -39,7 +39,7 @@ namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp
 
         private IEnumerable<string> MethodSignature()
         {
-            return new[] {Indent(), "[Fact]\n", Indent(), $"public void {Name.ToMethodName()}()\n"};
+            return new[] {Indent(), "[Fact]\n", Indent(), $"public void {Name}()\n"};
         }
 
         private IEnumerable<string> MethodBegin()

@@ -16,12 +16,21 @@ namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp
 
         public string Handle(TemplateConversionRequest request, Func<TemplateConversionRequest, string> next)
         {
-            var featureContent =
-                new[] {request.FileInfo.NameWithoutExtension() + "Test"}
-                    .Concat(request.FeatureContent.Select(line => _context.Indent + line))
-                    .ToArray();
+            var newRequest = new TemplateConversionRequest(
+                request.FileInfo,
+                request.Namespace,
+                NewFeatureContent(request)
+            );
 
-            return next(new TemplateConversionRequest(request.FileInfo, request.Namespace, featureContent));
+            return next(newRequest);
+        }
+
+        private string[] NewFeatureContent(TemplateConversionRequest request)
+        {
+            var wrapperTestClass = request.FileInfo.NameWithoutExtension() + "Test";
+            var indentedFeatureContent = request.FeatureContent.Select(line => _context.Indent + line);
+
+            return new[] {wrapperTestClass}.Concat(indentedFeatureContent).ToArray();
         }
     }
 }

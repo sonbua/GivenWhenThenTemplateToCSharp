@@ -1,4 +1,5 @@
 using System;
+using GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp.Normalize;
 using GivenWhenThenTemplateToCSharp.ResponsibilityChain;
 
 namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp
@@ -7,10 +8,12 @@ namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp
         : IHandler<TemplateConversionRequest, string>
     {
         private readonly ConvertTemplateToCSharpContext _context;
+        private readonly Normalizer _normalizer;
 
-        public ConvertTemplateToCSharpCore(ConvertTemplateToCSharpContext context)
+        public ConvertTemplateToCSharpCore(ConvertTemplateToCSharpContext context, Normalizer normalizer)
         {
             _context = context;
+            _normalizer = normalizer;
         }
 
         public string Handle(TemplateConversionRequest request, Func<TemplateConversionRequest, string> next)
@@ -21,7 +24,7 @@ namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp
 
             foreach (var line in request.FeatureContent)
             {
-                previousNode = Node.Parse(line, previousNode, _context.Indent);
+                previousNode = Node.Parse(line, _normalizer, previousNode, _context.Indent);
             }
 
             return rootNode.ToString();

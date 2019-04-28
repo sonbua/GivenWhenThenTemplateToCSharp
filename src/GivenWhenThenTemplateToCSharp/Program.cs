@@ -6,6 +6,7 @@ using System.Linq;
 using CommandLine;
 using GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp;
 using GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp.DetectIndent;
+using GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp.Normalize;
 
 namespace GivenWhenThenTemplateToCSharp
 {
@@ -91,7 +92,14 @@ namespace GivenWhenThenTemplateToCSharp
                     context
                 ),
                 new EnrichFileNameAsWrapperTestClass(context),
-                new ConvertTemplateToCSharpCore(context)
+                new ConvertTemplateToCSharpCore(
+                    context,
+                    new Normalizer(
+                        new ReplaceWithUnderscore(),
+                        new RemoveString(),
+                        new ReturnAsIs()
+                    )
+                )
             );
         }
 

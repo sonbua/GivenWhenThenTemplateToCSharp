@@ -50,7 +50,7 @@ namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp
         private IEnumerable<string> ClassSignature()
         {
             yield return Indent();
-            yield return $"public class {Name.ToClassName()}";
+            yield return $"public class {Name}";
 
             if (Parent is NamespaceNode)
             {
@@ -59,7 +59,7 @@ namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp
             }
 
             yield return " : ";
-            yield return Parent.Name.ToClassName();
+            yield return Parent.Name;
             yield return "\n";
         }
 
