@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/7gxvggk4r1aauun9/branch/master?svg=true)](https://ci.appveyor.com/project/sonbua/givenwhenthentemplatetocsharp/branch/master)
+
 # Given-When-Then template to C# conversion
 
 ## Quick start
