@@ -2,15 +2,15 @@ using GivenWhenThenTemplateToCSharp.ResponsibilityChain;
 
 namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp
 {
-    public class ConvertTemplateToCSharpHandler : Handler<TemplateConversionRequest, string>
+    public class ConvertTemplateToCSharpHandler : Handler<ConvertTemplateToCSharpRequest, string>
     {
         public ConvertTemplateToCSharpHandler(
-            TrimEndFeatureContent trimEndFeatureContent,
+            TrimEndFeatureContentAndRemoveEmptyLines trimEndFeatureContentAndRemoveEmptyLines,
             DetectIndentAdapter detectIndentAdapter,
             EnrichFileNameAsWrapperTestClass enrichFileNameAsWrapperTestClass,
             ConvertTemplateToCSharpCore convertTemplateToCSharpCore)
         {
-            AddHandler(trimEndFeatureContent);
+            AddHandler(trimEndFeatureContentAndRemoveEmptyLines);
             AddHandler(detectIndentAdapter);
             AddHandler(enrichFileNameAsWrapperTestClass);
             AddHandler(convertTemplateToCSharpCore);

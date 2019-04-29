@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
 using System.Linq;
 using CommandLine;
+using GivenWhenThenTemplateToCSharp.ConvertMultipleTemplatesToCSharp;
 using GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp;
 using GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp.DetectIndent;
 using GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp.Normalize;
@@ -16,7 +16,12 @@ namespace GivenWhenThenTemplateToCSharp
         {
             var options = ParseArguments(args);
 
-            ConvertTemplatesToCSharp(options);
+            var handler = ConvertMultipleTemplatesToCSharpHandlerFactory();
+
+            handler.Handle(
+                new ConvertMultipleTemplatesToCSharpRequest(options.FeatureFiles.ToArray(), options.Namespace),
+                null
+            );
         }
 
         private static Options ParseArguments(string[] args)
@@ -50,62 +55,28 @@ namespace GivenWhenThenTemplateToCSharp
             );
         }
 
-        private static void ConvertTemplatesToCSharp(Options options)
-        {
-            foreach (var featureFilePath in options.FeatureFiles)
-            {
-                ConvertTemplateToCSharp(new FileInfo(featureFilePath), options.Namespace);
-            }
-        }
-
-        private static void ConvertTemplateToCSharp(FileInfo featureFile, string @namespace)
-        {
-            var csharpSourceCode = CsharpSourceCode(featureFile, @namespace);
-            var csharpSourceCodeFilePath = CsharpSourceCodeFilePath(featureFile);
-
-            File.WriteAllText(csharpSourceCodeFilePath, csharpSourceCode);
-
-            Console.WriteLine("info: C# source code is generated at " + csharpSourceCodeFilePath);
-        }
-
-        private static string CsharpSourceCode(FileInfo featureFile, string @namespace)
-        {
-            var request = new TemplateConversionRequest(
-                featureFile,
-                @namespace,
-                File.ReadAllLines(featureFile.FullName)
-            );
-
-            var converter = ConvertTemplateToCSharpHandlerFactory();
-
-            return converter.Handle(request, null);
-        }
-
-        private static ConvertTemplateToCSharpHandler ConvertTemplateToCSharpHandlerFactory()
+        private static ConvertMultipleTemplatesToCSharpHandler ConvertMultipleTemplatesToCSharpHandlerFactory()
         {
             var context = new ConvertTemplateToCSharpContext();
 
-            return new ConvertTemplateToCSharpHandler(
-                new TrimEndFeatureContent(),
-                new DetectIndentAdapter(
-                    new DetectIndentHandler(new DefaultToTab(), new ParseIndentInformationFromSecondLine()),
-                    context
-                ),
-                new EnrichFileNameAsWrapperTestClass(context),
-                new ConvertTemplateToCSharpCore(
-                    context,
-                    new Normalizer(
-                        new ReplaceWithUnderscore(),
-                        new RemoveString(),
-                        new ReturnAsIs()
+            return new ConvertMultipleTemplatesToCSharpHandler(
+                new ConvertTemplateToCSharpHandler(
+                    new TrimEndFeatureContentAndRemoveEmptyLines(),
+                    new DetectIndentAdapter(
+                        new DetectIndentHandler(new DefaultToTab(), new ParseIndentInformationFromSecondLine()),
+                        context
+                    ),
+                    new EnrichFileNameAsWrapperTestClass(context),
+                    new ConvertTemplateToCSharpCore(
+                        context,
+                        new Normalizer(
+                            new ReplaceWithUnderscore(),
+                            new RemoveString(),
+                            new ReturnAsIs()
+                        )
                     )
                 )
             );
-        }
-
-        private static string CsharpSourceCodeFilePath(FileInfo featureFile)
-        {
-            return Path.Combine(featureFile.DirectoryName, featureFile.NameWithoutExtension() + "Test.cs");
         }
 
         [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]

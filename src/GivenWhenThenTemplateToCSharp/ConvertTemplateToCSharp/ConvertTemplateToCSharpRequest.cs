@@ -2,9 +2,9 @@ using System.IO;
 
 namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp
 {
-    public class TemplateConversionRequest
+    public class ConvertTemplateToCSharpRequest
     {
-        public TemplateConversionRequest(FileInfo fileInfo, string @namespace, string[] featureContent)
+        public ConvertTemplateToCSharpRequest(FileInfo fileInfo, string @namespace, string[] featureContent)
         {
             FileInfo = fileInfo;
             Namespace = @namespace;

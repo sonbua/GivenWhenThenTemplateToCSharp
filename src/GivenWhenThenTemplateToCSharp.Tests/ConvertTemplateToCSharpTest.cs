@@ -16,7 +16,7 @@ namespace GivenWhenThenTemplateToCSharp.Tests
             var context = new ConvertTemplateToCSharpContext();
 
             _converter = new ConvertTemplateToCSharpHandler(
-                new TrimEndFeatureContent(),
+                new TrimEndFeatureContentAndRemoveEmptyLines(),
                 new DetectIndentAdapter(
                     new DetectIndentHandler(new DefaultToTab(), new ParseIndentInformationFromSecondLine()),
                     context
@@ -35,12 +35,12 @@ namespace GivenWhenThenTemplateToCSharp.Tests
 
         public class given_a_template_conversion_request_with_drilled_down_scenarios_only : ConvertTemplateToCSharpTest
         {
-            private readonly TemplateConversionRequest _request;
+            private readonly ConvertTemplateToCSharpRequest _request;
 
             public given_a_template_conversion_request_with_drilled_down_scenarios_only()
             {
                 _request =
-                    new TemplateConversionRequest(
+                    new ConvertTemplateToCSharpRequest(
                         new FileInfo("./data/Scenario1.feature"),
                         "SomeNamespace",
                         new[]
@@ -91,11 +91,11 @@ namespace GivenWhenThenTemplateToCSharp.Tests
 
         public class given_multiple_given_when_then_in_a_feature_with_blank_line : ConvertTemplateToCSharpTest
         {
-            private readonly TemplateConversionRequest _request;
+            private readonly ConvertTemplateToCSharpRequest _request;
 
             public given_multiple_given_when_then_in_a_feature_with_blank_line()
             {
-                _request = new TemplateConversionRequest(
+                _request = new ConvertTemplateToCSharpRequest(
                     new FileInfo("MultipleSiteSupport.feature"),
                     "Tests",
                     new[]

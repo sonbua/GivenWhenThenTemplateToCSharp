@@ -5,7 +5,7 @@ using GivenWhenThenTemplateToCSharp.ResponsibilityChain;
 namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp
 {
     public class ConvertTemplateToCSharpCore
-        : IHandler<TemplateConversionRequest, string>
+        : IHandler<ConvertTemplateToCSharpRequest, string>
     {
         private readonly ConvertTemplateToCSharpContext _context;
         private readonly Normalizer _normalizer;
@@ -16,7 +16,7 @@ namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp
             _normalizer = normalizer;
         }
 
-        public string Handle(TemplateConversionRequest request, Func<TemplateConversionRequest, string> next)
+        public string Handle(ConvertTemplateToCSharpRequest request, Func<ConvertTemplateToCSharpRequest, string> next)
         {
             var rootNode = new NamespaceNode(request.Namespace, new Node[0]);
 

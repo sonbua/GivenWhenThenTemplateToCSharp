@@ -4,10 +4,10 @@ using GivenWhenThenTemplateToCSharp.ResponsibilityChain;
 
 namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp
 {
-    public class TrimEndFeatureContent
-        : IHandler<TemplateConversionRequest, string>
+    public class TrimEndFeatureContentAndRemoveEmptyLines
+        : IHandler<ConvertTemplateToCSharpRequest, string>
     {
-        public string Handle(TemplateConversionRequest request, Func<TemplateConversionRequest, string> next)
+        public string Handle(ConvertTemplateToCSharpRequest request, Func<ConvertTemplateToCSharpRequest, string> next)
         {
             var featureContent =
                 request.FeatureContent
@@ -15,7 +15,7 @@ namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp
                     .Where(line => !string.IsNullOrEmpty(line))
                     .ToArray();
 
-            return next(new TemplateConversionRequest(request.FileInfo, request.Namespace, featureContent));
+            return next(new ConvertTemplateToCSharpRequest(request.FileInfo, request.Namespace, featureContent));
         }
     }
 }

@@ -9,8 +9,9 @@ namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp.DetectIndent
         public string Handle(string[] featureContent, Func<string[], string> next)
         {
             var lineWithIndent = featureContent[1];
+            var indentSize = lineWithIndent.Length - lineWithIndent.TrimStart().Length;
 
-            return lineWithIndent.Substring(0, lineWithIndent.Length - lineWithIndent.Trim().Length);
+            return lineWithIndent.Substring(0, indentSize);
         }
     }
 }

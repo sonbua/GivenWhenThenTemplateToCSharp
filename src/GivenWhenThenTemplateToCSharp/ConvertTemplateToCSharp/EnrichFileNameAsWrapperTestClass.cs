@@ -5,7 +5,7 @@ using GivenWhenThenTemplateToCSharp.ResponsibilityChain;
 namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp
 {
     public class EnrichFileNameAsWrapperTestClass
-        : IHandler<TemplateConversionRequest, string>
+        : IHandler<ConvertTemplateToCSharpRequest, string>
     {
         private readonly ConvertTemplateToCSharpContext _context;
 
@@ -14,9 +14,9 @@ namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp
             _context = context;
         }
 
-        public string Handle(TemplateConversionRequest request, Func<TemplateConversionRequest, string> next)
+        public string Handle(ConvertTemplateToCSharpRequest request, Func<ConvertTemplateToCSharpRequest, string> next)
         {
-            var newRequest = new TemplateConversionRequest(
+            var newRequest = new ConvertTemplateToCSharpRequest(
                 request.FileInfo,
                 request.Namespace,
                 NewFeatureContent(request)
@@ -25,9 +25,10 @@ namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp
             return next(newRequest);
         }
 
-        private string[] NewFeatureContent(TemplateConversionRequest request)
+        private string[] NewFeatureContent(ConvertTemplateToCSharpRequest request)
         {
-            var wrapperTestClass = request.FileInfo.NameWithoutExtension() + "Test";
+            var featureName = request.FileInfo.NameWithoutExtension();
+            var wrapperTestClass = featureName + "Test";
             var indentedFeatureContent = request.FeatureContent.Select(line => _context.Indent + line);
 
             return new[] {wrapperTestClass}.Concat(indentedFeatureContent).ToArray();

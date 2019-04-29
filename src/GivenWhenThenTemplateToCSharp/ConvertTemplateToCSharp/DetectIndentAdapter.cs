@@ -5,7 +5,7 @@ using GivenWhenThenTemplateToCSharp.ResponsibilityChain;
 namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp
 {
     public class DetectIndentAdapter
-        : IHandler<TemplateConversionRequest, string>
+        : IHandler<ConvertTemplateToCSharpRequest, string>
     {
         private readonly DetectIndentHandler _detectIndentHandler;
         private readonly ConvertTemplateToCSharpContext _context;
@@ -16,7 +16,7 @@ namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp
             _context = context;
         }
 
-        public string Handle(TemplateConversionRequest request, Func<TemplateConversionRequest, string> next)
+        public string Handle(ConvertTemplateToCSharpRequest request, Func<ConvertTemplateToCSharpRequest, string> next)
         {
             _context.Indent = _detectIndentHandler.Handle(request.FeatureContent, null);
 
