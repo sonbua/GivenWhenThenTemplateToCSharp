@@ -4,7 +4,7 @@
 
 ## Quick start
 
-Assuming that a feature is described in `/c/features/GuessTheWord.feature` with this content
+Assuming that a feature is described in `/path/to/features/GuessTheWord.feature` with this content
 
 ```
 Given the Maker has started a game with the word silky
@@ -16,16 +16,16 @@ Run this in the repository's root directory
 
 ```
 cd src/GivenWhenThenTemplateToCSharp
-dotnet run -- --features /c/features/GuessTheWord.feature --namespace ProductionCode.Tests
+dotnet run -- --features /path/to/features/GuessTheWord.feature --namespace ProductionCode.Tests
 ```
 
 Or in the commandline where `gwt.exe` is located
 
 ```
-gwt --features /c/features/GuessTheWord.feature --namespace ProductionCode.Tests
+gwt --features /path/to/features/GuessTheWord.feature --namespace ProductionCode.Tests
 ```
 
-Test file is generated in the same directory as the feature file, i.e. `/c/features/GuessTheWordTest.cs`
+Test file is generated in the same directory as the feature file, i.e. `/path/to/features/GuessTheWordTest.cs`
 
 ```c#
 namespace ProductionCode.Tests
