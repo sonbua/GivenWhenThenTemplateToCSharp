@@ -71,7 +71,7 @@ namespace GivenWhenThenTemplateToCSharp
                         context,
                         new Normalizer(
                             new ReplaceWithUnderscore(),
-                            new RemoveString(),
+                            new RemoveSpecialCharacters(),
                             new ReturnAsIs()
                         )
                     )

@@ -26,7 +26,7 @@ namespace GivenWhenThenTemplateToCSharp.Tests
                     context,
                     new Normalizer(
                         new ReplaceWithUnderscore(),
-                        new RemoveString(),
+                        new RemoveSpecialCharacters(),
                         new ReturnAsIs()
                     )
                 )

@@ -7,11 +7,11 @@ namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp.Normalize
     {
         public Normalizer(
             ReplaceWithUnderscore replaceWithUnderscore,
-            RemoveString removeString,
+            RemoveSpecialCharacters removeSpecialCharacters,
             ReturnAsIs returnAsIs)
         {
             AddHandler(replaceWithUnderscore);
-            AddHandler(removeString);
+            AddHandler(removeSpecialCharacters);
             AddHandler(returnAsIs);
         }
     }

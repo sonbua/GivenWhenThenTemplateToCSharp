@@ -4,12 +4,12 @@ using GivenWhenThenTemplateToCSharp.ResponsibilityChain;
 
 namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp.Normalize
 {
-    public class RemoveString
+    public class RemoveSpecialCharacters
         : IHandler<string, string>
     {
         private readonly List<string> _toBeRemoved;
 
-        public RemoveString()
+        public RemoveSpecialCharacters()
         {
             _toBeRemoved = new List<string> {"'", "\"", "!", "."};
         }
