@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using EnsureThat;
 using GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp.Normalize;
 
 namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp
@@ -13,20 +14,9 @@ namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp
 
         protected Node(string name, Node parent, Node[] children)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentException("name should not be null or empty");
-            }
-
-            if (parent == null)
-            {
-                throw new ArgumentNullException(nameof(parent));
-            }
-
-            if (children == null)
-            {
-                throw new ArgumentNullException(nameof(children));
-            }
+            EnsureArg.IsNotNullOrEmpty(name, nameof(name));
+            EnsureArg.IsNotNull(parent, nameof(parent));
+            EnsureArg.IsNotNull(children, nameof(children));
 
             if (!(parent is EmptyNode))
             {

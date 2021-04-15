@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using EnsureThat;
 
 namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp
 {
@@ -14,15 +15,13 @@ namespace GivenWhenThenTemplateToCSharp.ConvertTemplateToCSharp
 
         protected override void AddChild(Node child)
         {
-            if (child == null)
-            {
-                throw new ArgumentNullException(nameof(child));
-            }
-
-            if (child is NamespaceNode)
-            {
-                throw new ArgumentException("Namespace cannot be added to a class");
-            }
+            EnsureArg.IsNotNull(child, nameof(child));
+            EnsureArg.IsNotOfType(
+                param: child,
+                nonExpectedType: typeof(NamespaceNode),
+                paramName: nameof(child),
+                optsFn: options => options.WithMessage("Namespace cannot be added to a class")
+            );
 
             Children.Add(child);
         }
